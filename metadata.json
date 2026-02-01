@@ -1,0 +1,5 @@
+{
+  "name": "The Tower of Entropy",
+  "description": "A roguelite adaptation of the Tower of Hanoi. Manage your 'Moves' as a life resource, adapt to random anomalies, and combat the inevitable heat death of the universe.",
+  "requestFramePermissions": []
+}
