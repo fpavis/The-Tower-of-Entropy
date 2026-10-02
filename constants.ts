@@ -382,7 +382,7 @@ export const RELIC_INFO: Record<RelicId, RelicInfo> = {
     name: 'Overclocker',
     glyph: '⚡',
     rarity: 'legendary',
-    desc: '+50% Bits from every round, but 10% less energy refill.',
+    desc: '+60% Bits from every round, but 5% less energy refill.',
     cost: 450,
   },
   FAILSAFE: {

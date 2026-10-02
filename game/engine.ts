@@ -242,7 +242,7 @@ const beginRound = (run: RunState, meta: MetaUpgrades, isNewRun: boolean): RunSt
   } else {
     const base = required + meta.minMoveBonus + run.upgrades.flatRefillBonus;
     movesAdded = Math.floor(base * (1 + run.upgrades.percentRefillBonus));
-    if (hasRelic(run.relics, 'OVERCLOCKER')) movesAdded = Math.floor(movesAdded * 0.9);
+    if (hasRelic(run.relics, 'OVERCLOCKER')) movesAdded = Math.floor(movesAdded * 0.95);
     if (meta.interestRate > 0) movesAdded += Math.floor(carry * meta.interestRate);
   }
   const total = carry + movesAdded;
@@ -412,7 +412,7 @@ const completeRound = (run: RunState, meta: MetaUpgrades): { run: RunState; even
   }
 
   const baseBits =
-    100 * Math.sqrt(s.round) * upgrades.baseBitMultiplier * (hasRelic(run.relics, 'OVERCLOCKER') ? 1.5 : 1);
+    100 * Math.sqrt(s.round) * upgrades.baseBitMultiplier * (hasRelic(run.relics, 'OVERCLOCKER') ? 1.6 : 1);
   const penalty = 20 * over;
   const roundBits = Math.max(0, baseBits - penalty) * combo;
 
