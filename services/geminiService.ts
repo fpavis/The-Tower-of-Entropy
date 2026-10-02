@@ -13,12 +13,26 @@ const FALLBACK_WISDOMS = [
   "The tower stands tall amidst the void.",
   "Time flows only forward; make your moves count.",
   "Entropy increases, but your will remains constant.",
-  "In the face of infinity, every step matters."
+  "In the face of infinity, every step matters.",
+  "Disorder is only order you haven't understood yet.",
+  "Each ring you place is a small defeat for the dark.",
+  "The tower remembers every move you make."
 ];
+
+const BOSS_WISDOMS = [
+  "Something vast has noticed your tower.",
+  "Guardians of the void do not tire. Be efficient.",
+  "A singularity bends every path toward its center."
+];
+
+const randomOf = (list: string[]) => list[Math.floor(Math.random() * list.length)];
+
+const localWisdom = (context: string) =>
+  /boss/i.test(context) ? randomOf(BOSS_WISDOMS) : randomOf(FALLBACK_WISDOMS);
 
 export const getOracleWisdom = async (context: string): Promise<string> => {
   const ai = getClient();
-  if (!ai) return "The Oracle is silent (Missing API Key).";
+  if (!ai) return localWisdom(context);
 
   try {
     const response = await ai.models.generateContent({
@@ -31,7 +45,7 @@ export const getOracleWisdom = async (context: string): Promise<string> => {
     });
     
     // Safety check for empty response
-    return response.text?.trim() || FALLBACK_WISDOMS[Math.floor(Math.random() * FALLBACK_WISDOMS.length)];
+    return response.text?.trim() || localWisdom(context);
   } catch (error: any) {
     // Graceful fallback for Rate Limits (429) or other API issues
     const errorMessage = error.toString();
@@ -42,6 +56,6 @@ export const getOracleWisdom = async (context: string): Promise<string> => {
     }
     
     // Return a random fallback so the UI always has content
-    return FALLBACK_WISDOMS[Math.floor(Math.random() * FALLBACK_WISDOMS.length)];
+    return localWisdom(context);
   }
 };
